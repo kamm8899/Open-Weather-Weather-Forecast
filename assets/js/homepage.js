@@ -20,10 +20,14 @@ var temp;
 var humidity;
 var windSpeed;
 var uvIndex;
+//create element to get form and user input
+var userSearchEl= document.querySelector("#user-form");
+var cityNameEl = document.querySelector("#cityName");
 
 //get fetch for api
 var getWeatherInfo = function(){
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=Clinton&appid=eec3413a16d43f5e64f5215a7760f24b")
+    //fetch request to get Munich as a city
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=Munich&appid=eec3413a16d43f5e64f5215a7760f24b")
 
     .then(function(response) {
         return response.json();
@@ -32,4 +36,19 @@ var getWeatherInfo = function(){
           console.log(response);
 });
 }
+
+var formSubmitHandler = function(event){
+    event.preventDefault();
+    var cityName = cityNameEl.nodeValue.trim();
+
+    //check if City name is valid
+    if(cityName){
+        getWeatherInfo(cityName);
+        cityNameEl.value= "";
+    }else{
+        alert("Please enter a valid City Name");
+    }
+}
+//add Listener for the form for city
+userSearchEl.addEventListener("submit", formSubmitHandler);
 getWeatherInfo();
