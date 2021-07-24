@@ -165,11 +165,35 @@ function uvData(uvInfo){
     uvDisplayContainer.innerHTML= "<span>UV Index: "+ uvInfo.current.uvi + "</span>";
     document.body.appendChild(uvDisplayContainer)
     
-//add class in CSS for favorable moderate and Severe
 
 }
 //5 day Forecast
 //use the daily One call, do the append to HTML 
+function Forecast(weatherData){
+    //fetch Forecast
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat="
+        + weatherData.coord.lat
+        +"&lon="
+        + weatherData.coord.lon
+        +"&appid="
+        +APIKey
+        + "&exclude=current,hourly"
+        + "&units=imperial"
+        )
+        //then function to pull fetch with response
+        .then(function(response) {
+            return response.json();
+          })
+          .then(function(response) {
+              forecastData(response);
+              console.log(response);
+              
+    });
+    }
+
+    function getWeatherForecast(forecastData){
+        
+    }
 
 
 

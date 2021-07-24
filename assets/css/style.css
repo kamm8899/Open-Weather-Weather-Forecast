@@ -48,10 +48,11 @@
 }
 .forecast{
     display:flex;
-    justify-content: center;
-    border-top: 2px solid grey;
+    justify-content: flex-end;
     font-size: 30px;
     font-weight: bold;
+    margin:40px;
+    
 }
 .app-title{
     font-size: 40px;
