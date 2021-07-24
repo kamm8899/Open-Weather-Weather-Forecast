@@ -51,3 +51,30 @@
     font-size: 30px;
     font-weight: bold;
 }
+.currentCity h1{
+    display:flex;
+    justify-content: flex-end;
+}
+.card{
+    margin: 10px 20px 0;
+    border: 5px solid blue;
+    border-radius: 30px;
+    width: 25%;
+    padding: 0 0 20px;
+
+}
+.form-input{
+    height: 50px;
+    width: 200px;
+    margin: 4px;
+}
+.card-header {
+    color: var(--primary);
+    background-color: rgb(3, 3, 54);
+    padding: 2.5%;
+    border-radius: 3px solid blue;
+    width: 100%;
+}
+.card div{
+    display: block;
+}

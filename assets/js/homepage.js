@@ -7,6 +7,7 @@
 
 //WHEN I view future weather conditions for that city
 //THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+
 //WHEN I click on a city in the search history
 //THEN I am again presented with current and future conditions for that city
 
@@ -53,16 +54,18 @@ function displayWeatherInfo(weatherData){
     weatherData.main.humidity;
     weatherData.main.pressure;
     weatherData.main.temp;
+
     weatherData.main.temp_max;
     weatherData.main.temp_min;
-    //weatherData.mai
+    
     uvIndex(weatherData);
 
 
 document.querySelector('#cityHeading').innerHTML=weatherData.name;
-document.querySelector('#temp').innerHTML= weatherData.clouds.all;
-document.querySelector('#humidity').innerHTML=weatherData.main.humidity;
-document.querySelector("#pressureId").innerHTML= weatherData.main.pressure;
+document.querySelector('#temp').innerHTML= "<span> Temperature: " + weatherData.clouds.all +"<span> F";
+document.querySelector('#humidity').innerHTML="<span> Humidity: "+ weatherData.main.humidity + "<span> %";
+document.querySelector("#pressureId").innerHTML= "<span> Pressure: " + weatherData.main.pressure +"<span> Pa";
+
 
     //display weather data 
    // var weatherDisplayContainer = document.createElement("section");
@@ -155,7 +158,7 @@ function uvData(uvInfo){
     else{
         uvDisplayContainer.classList.add("uvSevere");
     }
-    uvDisplayContainer.innerHTML= "<span>UV Index "+ uvInfo.current.uvi + "</span>";
+    uvDisplayContainer.innerHTML= "<span>UV Index: "+ uvInfo.current.uvi + "</span>";
     document.body.appendChild(uvDisplayContainer)
     
 //add class in CSS for favorable moderate and Severe
