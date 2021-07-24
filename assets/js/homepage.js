@@ -23,11 +23,13 @@ var uvIndex;
 //create element to get form and user input
 var userSearchEl= document.querySelector("#user-form");
 var cityNameEl = document.querySelector("#cityName");
+var savedCitiesEl = document.querySelector("#savedCities");
+var cityContainerEl = document.querySelector("#city-container");
 
 //get fetch for api
 var getWeatherInfo = function(){
     //fetch request to get Munich as a city
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=Munich&appid=eec3413a16d43f5e64f5215a7760f24b")
+    fetch("http://api.openweathermap.org/data/2.5/weather?id=524901&appid=eec3413a16d43f5e64f5215a7760f24b")
 
     .then(function(response) {
         return response.json();
@@ -39,7 +41,7 @@ var getWeatherInfo = function(){
 
 var formSubmitHandler = function(event){
     event.preventDefault();
-    var cityName = cityNameEl.nodeValue.trim();
+    var cityName = cityNameEl.value.trim();
 
     //check if City name is valid
     if(cityName){
@@ -49,6 +51,32 @@ var formSubmitHandler = function(event){
         alert("Please enter a valid City Name");
     }
 }
+
+var displayCities = function(){
+    //clear old content
+    cityContainerEl.textContent = "";
+    savedCitiesEl.textContent= cityName;
+
+    //add for loop to go over repos
+    for (var i=0;i<cityName.length; i++){
+        //format cityName
+
+        // create a conteiner for each repo
+
+        //create a span element to hold city name
+
+        //append to container
+
+        //append to dom
+
+    }
+
+
+}
+
+var uvIndex = function(){
+    
+};
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
 getWeatherInfo();
