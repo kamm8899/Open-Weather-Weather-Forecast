@@ -49,7 +49,7 @@ var getWeatherInfo = function(cityName){
 }
 
 function displayWeatherInfo(weatherData){
-    console.log(weatherData);
+    //console.log(weatherData);
     weatherData.clouds.all;
     weatherData.main.humidity;
     weatherData.main.pressure;
@@ -173,3 +173,9 @@ function uvData(uvInfo){
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
+
+
+
+//Fix colors for UV Index
+//Bring UV INdex up by the others
+//How do I add the date to the image
