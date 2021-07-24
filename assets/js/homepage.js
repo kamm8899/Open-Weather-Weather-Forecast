@@ -49,14 +49,16 @@ var getWeatherInfo = function(cityName){
 }
 
 function displayWeatherInfo(weatherData){
-    //console.log(weatherData);
+    console.log(weatherData);
     weatherData.clouds.all;
     weatherData.main.humidity;
     weatherData.main.pressure;
     weatherData.main.temp;
+    weatherData.wind.speed;
 
     weatherData.main.temp_max;
     weatherData.main.temp_min;
+
     
     uvIndex(weatherData);
 
@@ -65,7 +67,9 @@ document.querySelector('#cityHeading').innerHTML=weatherData.name;
 document.querySelector('#temp').innerHTML= "<span> Temperature: " + weatherData.clouds.all +"<span> F";
 document.querySelector('#humidity').innerHTML="<span> Humidity: "+ weatherData.main.humidity + "<span> %";
 document.querySelector("#pressureId").innerHTML= "<span> Pressure: " + weatherData.main.pressure +"<span> Pa";
+document.querySelector("#windSpeed").innerHTML="<span> Wind Speed " + weatherData.wind.speed + "</span>";
 
+//
 
     //display weather data 
    // var weatherDisplayContainer = document.createElement("section");
