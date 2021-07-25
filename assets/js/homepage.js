@@ -27,8 +27,6 @@ var savedCitiesEl = document.querySelector("#savedCities");
 var cityContainerEl = document.querySelector("#city-container");
 
 
-
-
 //get fetch for api
 var getWeatherInfo = function(cityName){
     //fetch request to get Munich as a city
@@ -44,6 +42,8 @@ var getWeatherInfo = function(cityName){
       })
       .then(function(response) {
           displayWeatherInfo(response);
+
+
           
 });
 }
@@ -58,8 +58,6 @@ function displayWeatherInfo(weatherData){
 
     weatherData.main.temp_max;
     weatherData.main.temp_min;
-
-    
     uvIndex(weatherData);
 
 
@@ -68,6 +66,18 @@ document.querySelector('#temp').innerHTML= "<span> Temperature: " + weatherData.
 document.querySelector('#humidity').innerHTML="<span> Humidity: "+ weatherData.main.humidity + "<span> %";
 document.querySelector("#pressureId").innerHTML= "<span> Pressure: " + weatherData.main.pressure +"<span> Pa";
 document.querySelector("#windSpeed").innerHTML="<span> Wind Speed " + weatherData.wind.speed + "</span>";
+
+ // Create a variable that will select the <div> where the photo will be displayed
+ var imgContainer = document.querySelector('#imgIcon');
+
+ // Empty out the <div> before we append a img to it
+ imgContainer.innerHTML = '';
+
+ var weatherImg = document.createElement('img');
+ weatherImg.setAttribute('src', "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png");
+
+  // Append 'img' to the <div>
+  imgContainer.appendChild(weatherImg);
 
 //
 
@@ -126,6 +136,7 @@ var displayCities = function(){
 }
 
 var uvIndex = function(weatherData){
+    
     fetch("https://api.openweathermap.org/data/2.5/onecall?lat="
     + weatherData.coord.lat
     +"&lon="
@@ -192,7 +203,7 @@ function Forecast(weatherData){
     }
 
     function getWeatherForecast(forecastData){
-        
+
     }
 
 
@@ -207,3 +218,7 @@ userSearchEl.addEventListener("submit", formSubmitHandler);
 //Fix colors for UV Index
 //Bring UV INdex up by the others
 //How do I add the date to the image
+//How do I add the img to the context
+//how do I clear the old UV Index
+//***Help with the Forecast
+//***get the cities saved
