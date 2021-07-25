@@ -220,6 +220,7 @@ function forecast(weatherData){
             console.log(forecastData.daily[i]);
             //create element first
             var forecastcard =document.createElement("div");
+            forecastcard.classList ="border border-secondary border-5 bg-secondary";
             var forecasttemp=document.createElement("h4");
             //how do I do title
             var forecasthum=document.createElement("h4");
