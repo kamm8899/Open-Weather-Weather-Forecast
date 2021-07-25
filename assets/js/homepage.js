@@ -221,6 +221,7 @@ function forecast(weatherData){
             //create element first
             var forecastcard =document.createElement("div");
             var forecasttemp=document.createElement("h4");
+            //how do I do title
             var forecasthum=document.createElement("h4");
             var forecastPres= document.createElement("h4");
             var forecastUV= document.createElement("h4");
@@ -229,14 +230,17 @@ function forecast(weatherData){
 
             forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind, forecastImg);
 
-            forecasttemp.textContent=forecastData.daily[i].temp.day;
+            forecasttemp.textContent= forecastData.daily[i].temp.day;
             forecasthum.textContent=forecastData.daily[i].humidity;
+            forecastPres.textContent=forecastData.daily[i].pressure;
+            forecastWind.textContent=forecastData.daily[i].wind_speed;
+            forecastUV.textContent=forecastData.daily[i].uvi;
             
             futureContainerEl.append(forecastcard);
 
-       }
+
     }
-   
+}
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
@@ -246,7 +250,7 @@ userSearchEl.addEventListener("submit", formSubmitHandler);
 
 
 //Fix colors for UV Index
-//Bring UV INdex up by the others
+
 //How do I add the date to the image
 //How do I center the image
 //how do I clear the old UV Index
