@@ -25,7 +25,8 @@ var userSearchEl= document.querySelector("#user-form");
 var cityNameEl = document.querySelector("#cityName");
 var savedCitiesEl = document.querySelector("#savedCities");
 var cityContainerEl = document.querySelector("#city-container");
-
+var currentCityContainerEl =document.querySelector("#currentCity");
+var forecastContainerEl = document.querySelector("#currentForecast");
 
 //get fetch for api
 var getWeatherInfo = function(cityName){
@@ -62,11 +63,13 @@ function displayWeatherInfo(weatherData){
 
 
 document.querySelector('#cityHeading').innerHTML=weatherData.name;
-document.querySelector('#temp').innerHTML= "<span> Temperature: " + weatherData.clouds.all +"<span> F";
-document.querySelector('#humidity').innerHTML="<span> Humidity: "+ weatherData.main.humidity + "<span> %";
-document.querySelector("#pressureId").innerHTML= "<span> Pressure: " + weatherData.main.pressure +"<span> Pa";
-document.querySelector("#windSpeed").innerHTML="<span> Wind Speed " + weatherData.wind.speed + "</span>";
+document.querySelector('#temp').innerHTML= "<span> Temperature: </span>" + weatherData.clouds.all +"<span> F</span>";
+document.querySelector('#humidity').innerHTML="<span> Humidity: </span>"+ weatherData.main.humidity + "<span> %</span>";
+document.querySelector("#pressureId").innerHTML= "<span> Pressure: </span>" + weatherData.main.pressure +"<span> Pa</span>";
+document.querySelector("#windSpeed").innerHTML="<span> Wind Speed </span>" + weatherData.wind.speed;
 
+currentCityContainerEl.classList.remove('hidden');
+forecastContainerEl.classList.remove('hidden');
  // Create a variable that will select the <div> where the photo will be displayed
  var imgContainer = document.querySelector('#imgIcon');
 
@@ -156,6 +159,7 @@ var uvIndex = function(weatherData){
 }
 
 function uvData(uvInfo){
+    
     var uvDisplayContainer = document.createElement("div");
     console.log(uvInfo);
     console.log(uvInfo.current.uvi);
@@ -173,7 +177,7 @@ function uvData(uvInfo){
     else{
         uvDisplayContainer.classList.add("uvSevere");
     }
-    uvDisplayContainer.innerHTML= "<span>UV Index: "+ uvInfo.current.uvi + "</span>";
+    uvDisplayContainer.innerHTML= "<span>UV Index: </span>"+ uvInfo.current.uvi;
     document.body.appendChild(uvDisplayContainer)
     
 
@@ -204,7 +208,8 @@ function Forecast(weatherData){
 
     function getWeatherForecast(forecastData){
 
-    }
+        }
+   
 
 
 
@@ -218,7 +223,7 @@ userSearchEl.addEventListener("submit", formSubmitHandler);
 //Fix colors for UV Index
 //Bring UV INdex up by the others
 //How do I add the date to the image
-//How do I add the img to the context
+//How do I center the image
 //how do I clear the old UV Index
 //***Help with the Forecast
 //***get the cities saved

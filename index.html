@@ -35,20 +35,20 @@
         <div class="col-12 col-md-4" id="savedCities"></div>
         <div id="city-container" class="list-group"></div>
        </div>
-      <section class="col-8" id="currentCity">
-        <div class="row p-3 d-flex flex-column" class= "weatherContainer"></div>
+      <section class="col-8 mt-1 flex-column p-3 hidden" id="currentCity">
+        <div class="row p-3 d-flex flex-column border border-primary border-4" id= "weatherContainer">
         <h1 id="cityHeading"></h1>
         <div id="imgIcon"></div>
         <div  id="temp"></div>
         <div id="humidity"></div>
         <div id="pressureId"></div>
         <div id="windSpeed"></div>
-        <div id="uvDisplay"></div>
+      </div>
       </div>
         </section>
         <div class ="row">
-        <div class="col-md-8 p-3 d-flex flex-column">
-      <h2 class="forecast">5-Day Forecast: <span id="fiveDAYFORECAST"></span></h2>
+        <div class="col-md-8 p-3 d-flex flex-column hidden" id="currentForecast">
+      <h2 class="forecast">5-Day Forecast <span id="fiveDayForecast"></span></h2>
       <!--<div id="row mt-2" hidden="true" class="list-group">-->
 
       </div>
