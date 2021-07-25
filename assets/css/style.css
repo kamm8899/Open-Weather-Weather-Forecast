@@ -51,7 +51,7 @@
     justify-content: flex-end;
     font-size: 30px;
     font-weight: bold;
-    margin:40px;
+    margin:0;
     
 }
 .app-title{
@@ -63,15 +63,17 @@
 .uvFavorable {
     background-color: rgb(42, 206, 42);
     border-radius: 20px;
+    width: 20%;
 } 
 .uvModerate {
     background-color: rgb(243, 130, 89);
     border-radius: 20px;
+    width: 20%;
 }
 .uvSevere{
     background-color: rgb(180, 10, 10);
     border-radius: 20px;
-    width:10%;
+    width:20%;
 }
 .hidden{
     display:none !important;
