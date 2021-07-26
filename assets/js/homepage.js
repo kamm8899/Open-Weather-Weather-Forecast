@@ -22,7 +22,7 @@ var month= currDate.getMonth()+1;
 //create element to get form and user input
 var userSearchEl= document.querySelector("#user-form");
 var cityNameEl = document.querySelector("#cityName");
-var savedCitiesEl = document.querySelector("#savedCities");
+var savedCitiesEl = document.querySelector("#city-container");
 var cityContainerEl = document.querySelector("#city-container");
 var currentCityContainerEl =document.querySelector("#currentCity");
 var forecastContainerEl = document.querySelector("#currentForecast");
@@ -219,40 +219,40 @@ function forecast(weatherData){
             //create element first
             var forecastcard =document.createElement("div");
             var titleTemp=document.createElement("span");
-            titleTemp.textContent="Temperature: " + forecastData.daily[i].temp.day;
-            forecastcard.classList ="border border-secondary border-5 bg-secondary img";
+            titleTemp.textContent=("Temperature: " + forecastData.daily[i].temp.day + "F");
+            forecastcard.classList ="border border-secondary border-5 bg-secondary mr-4 mt-2 flex-column";
             var forecasttemp=document.createElement("h4");
-            debugger;
             forecasttemp.appendChild(titleTemp);
             
-            //how do I do title textNode wasnt working
+            
             var forecasthum=document.createElement("h4");
-            var titlehum = document.createTextNode("Humidity: ");
+            var titlehum= document.createElement("span");
+            titlehum.textContent=("Humidity: " + forecastData.daily[i].humidity+ "%");
             forecasthum.appendChild(titlehum);
 
 
             var forecastPres= document.createElement("h4");
-            var titlePres = document.createTextNode("Pressure: ");
+            var titlePres = document.createElement("span");
+            titlePres.textContent=("Pressure: " + forecastData.daily[i].pressure +" Pa");
             forecastPres.appendChild(titlePres);
 
 
             var forecastUV= document.createElement("h4");
-            var titleUV = document.createTextNode("UV Index: ");
+            var titleUV = document.createElement("span");
+            titleUV.textContent=("UV Index: "+ forecastData.daily[i].uvi );
             forecastUV.appendChild(titleUV);
 
             var forecastWind=document.createElement("h4");
-            var titleWind = document.createTextNode("Wind Speed: ");
+            var titleWind = document.createElement("span");
+            titleWind.textContent=("Wind Speed: " + forecastData.daily[i].wind_speed+ " mph" )
             forecastWind.appendChild(titleWind);
 
+            //img
            
 
             forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind);
 
-            //forecasttemp.textContent= forecastData.daily[i].temp.day;
-           // forecasthum.textContent=forecastData.daily[i].humidity;
-            // forecastPres.textContent=forecastData.daily[i].pressure;
-            // forecastWind.textContent=forecastData.daily[i].wind_speed;
-            // forecastUV.textContent=forecastData.daily[i].uvi;
+           
             
             futureContainerEl.append(forecastcard);
 
@@ -288,6 +288,6 @@ displaySearchedCities();
 
 
 //How do I add the date to the image-not working
+//add dates to my cards
 //how do I clear the old UV Index
-// my title temp text isnt displaying
-//***get the cities saved line 121
+//cities can be saved but when button is clicked can't be viewed

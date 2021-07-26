@@ -86,6 +86,6 @@
 h4{
     font-size: 16px;
 }
-
-
-
+.forecastcard{
+    justify-content: space-around;
+}
