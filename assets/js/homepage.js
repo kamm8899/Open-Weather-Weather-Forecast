@@ -29,6 +29,9 @@ var forecastContainerEl = document.querySelector("#currentForecast");
 var futureContainerEl= document.querySelector("#currentForecast");
 var weatherContainerEl= document.querySelector("#weatherContainer");
 
+//Set localStorage
+var savedCities = localStorage.setItem("City", cityName);
+
 //get fetch for api
 var getWeatherInfo = function(cityName){
     //fetch request to get Munich as a city
@@ -68,7 +71,8 @@ document.querySelector('#cityHeading').innerHTML=weatherData.name;
 document.querySelector('#temp').innerHTML= "<span> Temperature: </span>" + weatherData.clouds.all +"<span> F</span>";
 document.querySelector('#humidity').innerHTML="<span> Humidity: </span>"+ weatherData.main.humidity + "<span> %</span>";
 document.querySelector("#pressureId").innerHTML= "<span> Pressure: </span>" + weatherData.main.pressure +"<span> Pa</span>";
-document.querySelector("#windSpeed").innerHTML="<span> Wind Speed </span>" + weatherData.wind.speed;
+document.querySelector("#windSpeed").innerHTML="<span> Wind Speed: </span>" + weatherData.wind.speed;
+//document.querySelector("#date").innerHTML= day + "-" + month + "-" + year;
 
 currentCityContainerEl.classList.remove('hidden');
 forecastContainerEl.classList.remove('hidden');
@@ -109,41 +113,35 @@ var formSubmitHandler = function(event){
     if(cityName){
         
         getWeatherInfo(cityName);
-        cityNameEl.value= "";
         
+        cityNameEl.value= "";
+        var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
+        if(!savedCities.includes(cityName.toLowerCase())){
+        savedCities.push(cityName.toLowerCase());
+        localStorage.setItem("Saved_History", JSON.stringify(savedCities));
+        var cityButton =document.createElement("button");
+        cityButton.textContent= cityName;
+        document.querySelector("#city-container").appendChild(cityButton);
+        }
     }else{
         alert("Please enter a valid City Name");
     }
+
     
 }
 //for search history part 
-var displayCities = function(){
-    //clear old content
- 
-
-    //add for loop to go over repos
-    for (var i=0;i<cityName.length; i++){
-        // create a container for each city
-        var savedCitiesEl =document.createElement("div");
-        //create a span element to hold city name
-        var savedCitiesH1 = document.createElement("h1");
-        //append to container
-        savedCitiesH1.innerHTML=weatherData.name;
-        //append to dom
-        savedCitiesEl.appendChild(savedCitiesH1);
- 
-    
-
-   var weatherImg = document.createElement('img');
-   weatherImg.setAttribute('src', "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png");
-  
-    // Append 'img' to the <div>
-    imgContainer.appendChild(weatherImg);
+var displaySearchedCities = function(){
+    //for page refresh
+    var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
+    for(var i=0; i<savedCities.length; i++){
+        var cityButton = document.createElement("button");
+        cityButton.textContent=savedCities[i];
+        document.querySelector("#city-container").appendChild(cityButton);
+    }
 
     }
 
 
-}
 
 var uvIndex = function(weatherData){
     
@@ -220,40 +218,76 @@ function forecast(weatherData){
             console.log(forecastData.daily[i]);
             //create element first
             var forecastcard =document.createElement("div");
-            forecastcard.classList ="border border-secondary border-5 bg-secondary";
+            var titleTemp=document.createElement("span");
+            titleTemp.textContent="Temperature: " + forecastData.daily[i].temp.day;
+            forecastcard.classList ="border border-secondary border-5 bg-secondary img";
             var forecasttemp=document.createElement("h4");
-            //how do I do title
+            debugger;
+            forecasttemp.appendChild(titleTemp);
+            
+            //how do I do title textNode wasnt working
             var forecasthum=document.createElement("h4");
+            var titlehum = document.createTextNode("Humidity: ");
+            forecasthum.appendChild(titlehum);
+
+
             var forecastPres= document.createElement("h4");
+            var titlePres = document.createTextNode("Pressure: ");
+            forecastPres.appendChild(titlePres);
+
+
             var forecastUV= document.createElement("h4");
+            var titleUV = document.createTextNode("UV Index: ");
+            forecastUV.appendChild(titleUV);
+
             var forecastWind=document.createElement("h4");
-            var forecastImg=document.createElement("h4");
+            var titleWind = document.createTextNode("Wind Speed: ");
+            forecastWind.appendChild(titleWind);
 
-            forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind, forecastImg);
+           
 
-            forecasttemp.textContent= forecastData.daily[i].temp.day;
-            forecasthum.textContent=forecastData.daily[i].humidity;
-            forecastPres.textContent=forecastData.daily[i].pressure;
-            forecastWind.textContent=forecastData.daily[i].wind_speed;
-            forecastUV.textContent=forecastData.daily[i].uvi;
+            forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind);
+
+            //forecasttemp.textContent= forecastData.daily[i].temp.day;
+           // forecasthum.textContent=forecastData.daily[i].humidity;
+            // forecastPres.textContent=forecastData.daily[i].pressure;
+            // forecastWind.textContent=forecastData.daily[i].wind_speed;
+            // forecastUV.textContent=forecastData.daily[i].uvi;
             
             futureContainerEl.append(forecastcard);
+
+
+            //create img on all cards
+
+// Create a variable that will select the <div> where the photo will be displayed
+ //var imgforecastContainer = document.querySelector('img');
+
+ // Empty out the <div> before we append a img to it
+ //imgforecastContainer.innerHTML = '';
+
+ //var savedweatherImg = document.createElement('img');
+ //savedweatherImg.setAttribute('src', "http://openweathermap.org/img/wn/" + forecastData.daily[i].weather[0].icon + ".png");
+
+  // Append 'img' to the <div>
+  //imgforecastContainer.appendChild(savedweatherImg);
 
 
     }
 }
 
+
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
 
+displaySearchedCities();
 
 
 
 
-//Fix colors for UV Index
 
-//How do I add the date to the image
-//How do I center the image
+
+
+//How do I add the date to the image-not working
 //how do I clear the old UV Index
-//***Help with the Forecast
+// my title temp text isnt displaying
 //***get the cities saved line 121
