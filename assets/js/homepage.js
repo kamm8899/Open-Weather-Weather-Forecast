@@ -1,5 +1,3 @@
-//THEN I am presented with current and future conditions for that city and that city is added to the search history
-//WHEN I view current weather conditions for that city
 
 //WHEN I view future weather conditions for that city
 //THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
@@ -8,9 +6,7 @@
 //THEN I am again presented with current and future conditions for that city
 
 var APIKey ='eec3413a16d43f5e64f5215a7760f24b';
-var temp;
-var humidity;
-var windSpeed;
+
 
 //dates
 var currDate= new Date();
@@ -21,7 +17,7 @@ var month= currDate.getMonth()+1;
 //create element to get form and user input
 var userSearchEl= document.querySelector("#user-form");
 var cityNameEl = document.querySelector("#cityName");
-var savedCitiesEl = document.querySelector("#city-container");
+var savedCitiesEl = document.querySelector("#saved-Cities");
 var cityContainerEl = document.querySelector("#city-container");
 var currentCityContainerEl =document.querySelector("#currentCity");
 var forecastContainerEl = document.querySelector("#currentForecast");
@@ -151,10 +147,9 @@ var uvIndex = function(weatherData){
 }
 
 function uvData(uvInfo , weatherData){
-    
     var uvDisplayContainer = document.createElement("div");
-    console.log(uvInfo);
-    console.log(uvInfo.current.uvi);
+    // console.log(uvInfo);
+    // console.log(uvInfo.current.uvi);
 
     //check UVIndex
      //favorable under 3    
@@ -226,6 +221,7 @@ function forecast(weatherData){
 
             var forecastUV= document.createElement("h4");
             var titleUV = document.createElement("span");
+            // forecastUV.textContent= "";
             titleUV.textContent=("UV Index: "+ forecastData.daily[i].uvi );
             forecastUV.appendChild(titleUV);
 
@@ -239,7 +235,7 @@ function forecast(weatherData){
             imgforecastContainer.setAttribute('src', "http://openweathermap.org/img/wn/" + forecastData.daily[i].weather[0].icon + ".png");
             forecastcard.appendChild(imgforecastContainer);
 
-            //add Days
+            //add Dayssa
             var date = appendDays(currDate, i);
             var month = date.getMonth()+1;
             var dateContainer= document.createElement("p");
@@ -262,19 +258,23 @@ function appendDays (date, days){
     return result;
 }
 
+//function that is used for add Listener
+function cityNameListener(event){
+    var city= event.target.getAttribute("cityname");
+    if(city){
+        displayWeatherInfo(city);
+    }
+}
+
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
-//savedCitiesEl.addEventListener("search", displaySearchedCities);
+cityContainerEl .addEventListener("search", cityNameListener);
 
 displaySearchedCities();
 
 
+//how do I clear the old UV Index 
 
-
-
-
-
-//how do I clear the old UV Index
 //cities can be saved but when button is clicked can't be viewed
 //all my Temperature is at zero-why? and it repeats in the forecast now
