@@ -51,7 +51,7 @@ var getWeatherInfo = function(cityName){
 }
 
 function displayWeatherInfo(weatherData){
-  //console.log(weatherData);
+  console.log(weatherData);
     weatherData.clouds.all;
     weatherData.main.humidity;
     weatherData.main.pressure;
@@ -65,7 +65,7 @@ function displayWeatherInfo(weatherData){
 
 
 document.querySelector('#cityHeading').innerHTML=(weatherData.name + (" " + day + "." + month + "." + year));
-document.querySelector('#temp').innerHTML= "<span> Temperature: </span>" + weatherData.clouds.all +"<span> F</span>";
+document.querySelector('#temp').innerHTML= "<span> Temperature: </span>" + weatherData.main.temp +"<span> F</span>";
 document.querySelector('#humidity').innerHTML="<span> Humidity: </span>"+ weatherData.main.humidity + "<span> %</span>";
 document.querySelector("#pressureId").innerHTML= "<span> Pressure: </span>" + weatherData.main.pressure +"<span> Pa</span>";
 document.querySelector("#windSpeed").innerHTML="<span> Wind Speed: </span>" + weatherData.wind.speed;
@@ -287,5 +287,4 @@ displaySearchedCities();
 
 //how do I clear the old UV Index, UV Index seems wrong
 //cities can be saved but when button is clicked can't be viewed
-//all my Temperature is at zero-why for currentDate?
 
