@@ -219,7 +219,7 @@ function forecast(weatherData){
             //create element first
             var forecastcard =document.createElement("div");
             var titleTemp=document.createElement("span");
-            titleTemp.textContent=("Temperature: " + forecastData.daily[i].temp.day + "F");
+            titleTemp.textContent=("Temp: " + forecastData.daily[i].temp.day + "F");
             forecastcard.classList ="border border-secondary border-5 bg-secondary mr-4 mt-2 flex-column";
             var forecasttemp=document.createElement("h4");
             forecasttemp.appendChild(titleTemp);
@@ -233,7 +233,7 @@ function forecast(weatherData){
 
             var forecastPres= document.createElement("h4");
             var titlePres = document.createElement("span");
-            titlePres.textContent=("Pressure: " + forecastData.daily[i].pressure +" Pa");
+            titlePres.textContent=("Pres: " + forecastData.daily[i].pressure +" Pa");
             forecastPres.appendChild(titlePres);
 
 
@@ -248,6 +248,11 @@ function forecast(weatherData){
             forecastWind.appendChild(titleWind);
 
             //img
+            var imgforecastContainer= document.createElement("img");
+            imgforecastContainer.setAttribute('src', "http://openweathermap.org/img/wn/" + forecastData.daily[i].weather[0].icon + ".png");
+            forecastcard.appendChild(imgforecastContainer);
+
+            
            
 
             forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind);
@@ -256,28 +261,13 @@ function forecast(weatherData){
             
             futureContainerEl.append(forecastcard);
 
-
-            //create img on all cards
-
-// Create a variable that will select the <div> where the photo will be displayed
- //var imgforecastContainer = document.querySelector('img');
-
- // Empty out the <div> before we append a img to it
- //imgforecastContainer.innerHTML = '';
-
- //var savedweatherImg = document.createElement('img');
- //savedweatherImg.setAttribute('src', "http://openweathermap.org/img/wn/" + forecastData.daily[i].weather[0].icon + ".png");
-
-  // Append 'img' to the <div>
-  //imgforecastContainer.appendChild(savedweatherImg);
-
-
     }
 }
 
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
+savedCitiesEl.addEventListener("search", displaySearchedCities);
 
 displaySearchedCities();
 
