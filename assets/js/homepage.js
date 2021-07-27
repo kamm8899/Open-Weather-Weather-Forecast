@@ -66,7 +66,7 @@ function displayWeatherInfo(weatherData){
 
 
 
-document.querySelector('#cityHeading').innerHTML=weatherData.name;
+document.querySelector('#cityHeading').innerHTML=(weatherData.name + (" " + day + "." + month + "." + year));
 document.querySelector('#temp').innerHTML= "<span> Temperature: </span>" + weatherData.clouds.all +"<span> F</span>";
 document.querySelector('#humidity').innerHTML="<span> Humidity: </span>"+ weatherData.main.humidity + "<span> %</span>";
 document.querySelector("#pressureId").innerHTML= "<span> Pressure: </span>" + weatherData.main.pressure +"<span> Pa</span>";
@@ -87,19 +87,7 @@ forecastContainerEl.classList.remove('hidden');
   // Append 'img' to the <div>
   imgContainer.appendChild(weatherImg);
 
-
-    //display weather data 
-   // var weatherDisplayContainer = document.createElement("section");
-   // weatherDisplayContainer.classList.add("poop");
-    //append to container
-   // var weatherH1 =document.createElement("h1");
-    //weatherH1.innerHTML= weatherData.name;
-   // weatherDisplayContainer.appendChild(weatherH1);
-    
-
-    //append to Dom
-   // document.body.appendChild(weatherDisplayContainer);
-
+           
 }
 
 var formSubmitHandler = function(event){
@@ -212,7 +200,7 @@ function forecast(weatherData){
     }
 
     function getWeatherForecast(forecastData){
-        console.log(forecastData);
+        //console.log(forecastData);
         for(var i=1;i<6;i++){
             console.log(forecastData.daily[i]);
             //create element first
@@ -252,7 +240,7 @@ function forecast(weatherData){
             forecastcard.appendChild(imgforecastContainer);
 
             //add Days
-            var date = appendDays(currDate, i+1);
+            var date = appendDays(currDate, i);
             var month = date.getMonth()+1;
             var dateContainer= document.createElement("p");
             dateContainer.append(date, month)
@@ -277,7 +265,7 @@ function appendDays (date, days){
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
-savedCitiesEl.addEventListener("search", displaySearchedCities);
+//savedCitiesEl.addEventListener("search", displaySearchedCities);
 
 displaySearchedCities();
 
@@ -287,8 +275,6 @@ displaySearchedCities();
 
 
 
-//How do I add the date to the image-not working
-//add dates to my cards
 //how do I clear the old UV Index
 //cities can be saved but when button is clicked can't be viewed
 //all my Temperature is at zero-why? and it repeats in the forecast now
