@@ -18,16 +18,14 @@ var month= currDate.getMonth()+1;
 var userSearchEl= document.querySelector("#user-form");
 var cityNameEl = document.querySelector("#cityName");
 var savedCitiesEl = document.querySelector("#saved-Cities");
-var cityContainerEl = document.querySelector("#saved_response");
+var cityContainerEl = document.querySelector("#city-container");
 var currentCityContainerEl =document.querySelector("#currentCity");
 var forecastContainerEl = document.querySelector("#currentForecast");
-//var futureContainerEl= document.querySelector("#currentForecast");
+var futureContainerEl= document.querySelector("#currentForecast");
 var weatherContainerEl= document.querySelector("#weatherContainer");
-//see if this changes anything
-var savedButton= document.querySelector("#btn_city");
 
 //Set localStorage
-//var savedCities = localStorage.setItem("City", cityName);
+var savedCities = localStorage.setItem("City", cityName);
 
 //get fetch for api
 var getWeatherInfo = function(cityName){
@@ -51,7 +49,7 @@ var getWeatherInfo = function(cityName){
 }
 
 function displayWeatherInfo(weatherData){
-  //console.log(weatherData);
+    console.log(weatherData);
     weatherData.clouds.all;
     weatherData.main.humidity;
     weatherData.main.pressure;
@@ -85,7 +83,6 @@ forecastContainerEl.classList.remove('hidden');
   // Append 'img' to the <div>
   imgContainer.appendChild(weatherImg);
 
-
            
 }
 
@@ -106,7 +103,6 @@ var formSubmitHandler = function(event){
         savedCities.push(cityName.toLowerCase());
         localStorage.setItem("Saved_History", JSON.stringify(savedCities));
         var cityButton =document.createElement("button");
-
         cityButton.textContent= cityName;
         document.querySelector("#city-container").appendChild(cityButton);
         }
@@ -118,25 +114,16 @@ var formSubmitHandler = function(event){
 }
 //for search history part 
 var displaySearchedCities = function(){
-    
     //for page refresh
-    var savedCities =JSON.parse(localStorage.getItem("Saved_History"))|| [];
+    var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
     for(var i=0; i<savedCities.length; i++){
         var cityButton = document.createElement("button");
-        //add class and id to see if it works
-        cityButton.setAttribute("id", "btn_city");
         cityButton.textContent=savedCities[i];
         document.querySelector("#city-container").appendChild(cityButton);
     }
 
     }
 
-    // function getSavedInfo(event){
-    //     event.preventDefault();
-    //     getWeatherForecast(cityName);
-    //     getWeatherInfo(cityName);
-
-    // }
 
 
 var uvIndex = function(weatherData){
@@ -193,8 +180,8 @@ function forecast(weatherData){
         + weatherData.coord.lon
         +"&appid="
         +APIKey
+        + "&exclude=current,hourly"
         + "&units=imperial"
-        +"&exclude=current,hourly"
         )
         //then function to pull fetch with response
         .then(function(response) {
@@ -208,17 +195,15 @@ function forecast(weatherData){
     }
 
     function getWeatherForecast(forecastData){
-        forecastContainerEl.textContent="";
         //console.log(forecastData);
         for(var i=1;i<6;i++){
-            
-            //console.log(forecastData.daily[i]);
+            console.log(forecastData.daily[i]);
             //create element first
             var forecastcard =document.createElement("div");
-            var forecasttemp=document.createElement("h4");
             var titleTemp=document.createElement("span");
             titleTemp.textContent=("Temp: " + forecastData.daily[i].temp.day + "F");
             forecastcard.classList ="border border-secondary border-5 bg-secondary mr-4 mt-2 flex-column";
+            var forecasttemp=document.createElement("h4");
             forecasttemp.appendChild(titleTemp);
             
             
@@ -251,13 +236,10 @@ function forecast(weatherData){
             forecastcard.appendChild(imgforecastContainer);
 
             //add Dayssa
-            var dateContainer= document.createElement("p");
-            dateContainer.classList=("date");
             var date = appendDays(currDate, i);
             var month = date.getMonth()+1;
-            dateContainer.textContent=(month + "." + date.getDate() + "." + date.getFullYear());
-            
-
+            var dateContainer= document.createElement("p");
+            dateContainer.append(date, month)
             forecastcard.appendChild(dateContainer);
            
 
@@ -265,27 +247,34 @@ function forecast(weatherData){
 
            
             
-            forecastContainerEl.append(forecastcard);
+            futureContainerEl.append(forecastcard);
 
     }
-
 }
 
 function appendDays (date, days){
-    var new_date = new Date (date);
-    new_date.setDate(new_date.getDate()+days);
-    new_date.toLocaleString("en-GB");
-    return new_date;
+    var result = new Date (date);
+    result.setDate(result.getDate()+days);
+    return result;
 }
+
+// //function that is used for add Listener
+// function cityNameListener(event){
+//     var city= event.target.getAttribute("cityname");
+//     if(city){
+//         displayWeatherInfo(city);
+//     }
+// }
+
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
-forecastContainerEl.addEventListener("click", displaySearchedCities); 
+//cityContainerEl .addEventListener("search", cityNameListener);
 
 displaySearchedCities();
 
 
 //how do I clear the old UV Index, UV Index seems wrong
-//cities can be saved but when button is clicked can't be viewed
-//all my Temperature is at zero-why for currentDate?
 
+//cities can be saved but when button is clicked can't be viewed
+//all my Temperature is at zero-why? and it repeats in the forecast now
