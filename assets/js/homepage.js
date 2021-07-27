@@ -1,7 +1,4 @@
 
-//WHEN I view future weather conditions for that city
-//THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
 //WHEN I click on a city in the search history
 //THEN I am again presented with current and future conditions for that city
 
@@ -21,10 +18,9 @@ var savedCitiesEl = document.querySelector("#saved-Cities");
 var cityContainerEl = document.querySelector("#saved_response");
 var currentCityContainerEl =document.querySelector("#currentCity");
 var forecastContainerEl = document.querySelector("#currentForecast");
-//var futureContainerEl= document.querySelector("#currentForecast");
+var savedCitiyContainerEl= document.querySelector("#city-container");
 var weatherContainerEl= document.querySelector("#weatherContainer");
-//see if this changes anything
-var savedButton= document.querySelector("#btn_city");
+
 
 //Set localStorage
 //var savedCities = localStorage.setItem("City", cityName);
@@ -92,8 +88,6 @@ forecastContainerEl.classList.remove('hidden');
 var formSubmitHandler = function(event){
     event.preventDefault();
     var cityName = cityNameEl.value.trim();
-    
-  // var city = document.getElementById('cityName').value;
 
     //check if City name is valid
     if(cityName){
@@ -116,27 +110,40 @@ var formSubmitHandler = function(event){
 
     
 }
-//for search history part 
-var displaySearchedCities = function(){
+
+var savedCitySearch =function(event){
+    console.log("Hello");
+    console.log(event.target);
+    event.preventDefault();
+    var cityName = cityNameEl.value.trim();
     
+        //check if City name is valid
+        if(cityName){
+            
+            getWeatherInfo(cityName);
+            
+            //cityNameEl.value= "";
+    }
+}
+
+
+
+//for search history part 
+var displaySearchedCities = function(event){
+    //event.preventDefault();
     //for page refresh
     var savedCities =JSON.parse(localStorage.getItem("Saved_History"))|| [];
     for(var i=0; i<savedCities.length; i++){
         var cityButton = document.createElement("button");
         //add class and id to see if it works
-        cityButton.setAttribute("id", "btn_city");
+        cityButton.classList.add("btn_city");
         cityButton.textContent=savedCities[i];
         document.querySelector("#city-container").appendChild(cityButton);
     }
 
     }
 
-    // function getSavedInfo(event){
-    //     event.preventDefault();
-    //     getWeatherForecast(cityName);
-    //     getWeatherInfo(cityName);
-
-    // }
+   
 
 
 var uvIndex = function(weatherData){
@@ -161,7 +168,8 @@ var uvIndex = function(weatherData){
 
 function uvData(uvInfo , weatherData){
     var uvDisplayContainer = document.createElement("div");
-    // console.log(uvInfo);
+    uvDisplayContainer.classList="uvi";
+    console.log(uvInfo);
     // console.log(uvInfo.current.uvi);
 
     //check UVIndex
@@ -171,7 +179,7 @@ function uvData(uvInfo , weatherData){
     if(uvInfo.current.uvi < 3){
     uvDisplayContainer.classList.add("uvFavorable"); 
     }
-    else if(uvInfo.current.uvi > 3 && uvInfo.current.uvi <=5 ){
+    else if(uvInfo.current.uvi > 3 && uvInfo.daily.uvi <=5 ){
     uvDisplayContainer.classList.add("uvModerate"); 
     }
     else{
@@ -280,11 +288,11 @@ function appendDays (date, days){
 
 //add Listener for the form for city
 userSearchEl.addEventListener("submit", formSubmitHandler);
-forecastContainerEl.addEventListener("click", displaySearchedCities); 
+var cityItem =document.querySelector(".btn_city"); 
 
 displaySearchedCities();
+cityItem.addEventListener("click", savedCitySearch);
 
-
-//how do I clear the old UV Index, UV Index seems wrong
+//how do I clear the old UV Index, UV Index seems wrong, it pulls it from the morning 
 //cities can be saved but when button is clicked can't be viewed
 
