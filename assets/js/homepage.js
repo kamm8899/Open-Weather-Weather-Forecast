@@ -1,4 +1,3 @@
-
 //THEN I am presented with current and future conditions for that city and that city is added to the search history
 //WHEN I view current weather conditions for that city
 
@@ -252,7 +251,12 @@ function forecast(weatherData){
             imgforecastContainer.setAttribute('src', "http://openweathermap.org/img/wn/" + forecastData.daily[i].weather[0].icon + ".png");
             forecastcard.appendChild(imgforecastContainer);
 
-            
+            //add Days
+            var date = appendDays(currDate, i+1);
+            var month = date.getMonth()+1;
+            var dateContainer= document.createElement("p");
+            dateContainer.append(date, month)
+            forecastcard.appendChild(dateContainer);
            
 
             forecastcard.append(forecasttemp, forecasthum, forecastPres, forecastUV,forecastWind);
@@ -262,6 +266,12 @@ function forecast(weatherData){
             futureContainerEl.append(forecastcard);
 
     }
+}
+
+function appendDays (date, days){
+    var result = new Date (date);
+    result.setDate(result.getDate()+days);
+    return result;
 }
 
 
@@ -281,3 +291,4 @@ displaySearchedCities();
 //add dates to my cards
 //how do I clear the old UV Index
 //cities can be saved but when button is clicked can't be viewed
+//all my Temperature is at zero-why? and it repeats in the forecast now

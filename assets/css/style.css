@@ -89,3 +89,9 @@ h4{
 .forecastcard{
     justify-content: space-around;
 }
+#city-container button{
+    background-color: grey;
+    border-radius: 3px;
+    padding: 10px;
+    margin-top: 10px;
+}
