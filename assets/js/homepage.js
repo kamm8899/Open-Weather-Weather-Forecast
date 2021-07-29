@@ -111,9 +111,9 @@ var savedCitySearch =function(event){
    // console.log("Hello");
     event.preventDefault();
     // var cityName = cityNameEl.value.trim();
-    var savedCity= event.target.innerHTML("cityName");
+    var savedCity= event.target.innerHTML;
     if(savedCity){
-        savedCity.innerHTML=displaySearchedCities;
+        savedCity.innerHTML=cityName ;
         
     }
     
