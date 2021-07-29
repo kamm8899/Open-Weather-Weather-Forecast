@@ -111,7 +111,7 @@ var savedCitySearch =function(event){
    // console.log("Hello");
     event.preventDefault();
     // var cityName = cityNameEl.value.trim();
-    var savedCity= event.target.getAttribute("cityName");
+    var savedCity= event.target.innerHTML("cityName");
     if(savedCity){
         displayWeatherInfo(savedCity);
         
@@ -127,7 +127,7 @@ var displaySearchedCities = function(event){
     for(var i=0; i<savedCities.length; i++){
         var cityButton = document.createElement("button");
         //add class and id to see if it works
-        cityButton.setAttribute("id", "btn_city");
+        cityButton.classList.add("renderCities"));
         cityButton.textContent=savedCities[i];
         document.querySelector("#city-container").appendChild(cityButton);
     }
