@@ -20,10 +20,11 @@ var currentCityContainerEl =document.querySelector("#currentCity");
 var forecastContainerEl = document.querySelector("#currentForecast");
 var savedCitiyContainerEl= document.querySelector("#city-container");
 var weatherContainerEl= document.querySelector("#weatherContainer");
-var cityButton= document.querySelector(".btn-city");
+var cityButton= document.querySelector("#btn-city");
 
 //Set localStorage
 //var savedCities = localStorage.setItem("City", cityName);
+var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
 
 //get fetch for api
 var getWeatherInfo = function(cityName){
@@ -39,10 +40,7 @@ var getWeatherInfo = function(cityName){
         return response.json();
       })
       .then(function(response) {
-          displayWeatherInfo(response);
-
-
-          
+          displayWeatherInfo(response);        
 });
 }
 
@@ -56,7 +54,7 @@ function displayWeatherInfo(weatherData){
 
     weatherData.main.temp_max;
     weatherData.main.temp_min;
-    uvIndex(weatherData);
+   uvIndex(weatherData);
 
 
 
@@ -80,8 +78,6 @@ forecastContainerEl.classList.remove('hidden');
 
   // Append 'img' to the <div>
   imgContainer.appendChild(weatherImg);
-
-
            
 }
 
@@ -112,27 +108,16 @@ var formSubmitHandler = function(event){
 }
 
 var savedCitySearch =function(event){
-    console.log("Hello");
-    console.log(event.target);
+   // console.log("Hello");
     event.preventDefault();
     // var cityName = cityNameEl.value.trim();
-    var citySaved= event.target.getAttribute(".btn-city");
-
-        //check if City name is valid
-        if(cityName){
-            getWeatherInfo(citySaved);
-            //return the value of button
-
-           //var cityValue= cityButton.value.trim();
+    var savedCity= event.target.getAttribute("cityName");
+    if(savedCity){
+        displayWeatherInfo(savedCity);
         
-          // getWeatherInfo(cityValue);
-            
-            //cityNameEl.value= "";
-
     }
+    
 }
-
-
 
 //for search history part 
 var displaySearchedCities = function(event){
@@ -142,15 +127,12 @@ var displaySearchedCities = function(event){
     for(var i=0; i<savedCities.length; i++){
         var cityButton = document.createElement("button");
         //add class and id to see if it works
-        cityButton.classList.add("btn_city");
+        cityButton.setAttribute("id", "btn_city");
         cityButton.textContent=savedCities[i];
         document.querySelector("#city-container").appendChild(cityButton);
     }
 
     }
-
-   
-
 
 var uvIndex = function(weatherData){
     
@@ -192,11 +174,13 @@ function uvData(uvInfo , weatherData){
         uvDisplayContainer.classList.add("uvSevere");
     }
     uvDisplayContainer.innerHTML= "<span>UV Index: </span>"+ uvInfo.current.uvi;
-    weatherContainerEl.append(uvDisplayContainer)
+    weatherContainerEl.append(uvDisplayContainer);
     //call forecast
     forecast(weatherData);
+    
 
 }
+
 //5 day Forecast
 //use the daily One call, do the append to HTML 
 function forecast(weatherData){
@@ -301,4 +285,3 @@ cityItem.addEventListener("click", savedCitySearch);
 
 //how do I clear the old UV Index, UV Index seems wrong, it pulls it from the morning 
 //cities can be saved but when button is clicked can't be viewed
-
