@@ -134,7 +134,7 @@ var displaySearchedCities = function(){
 
 var uvIndex = function(weatherData){
     
-    fetch("http://api.openweathermap.org/data/2.5/onecall?lat="
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat="
     + weatherData.coord.lat
     +"&lon="
     + weatherData.coord.lon
