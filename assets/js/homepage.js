@@ -1,7 +1,3 @@
-
-//WHEN I click on a city in the search history
-//THEN I am again presented with current and future conditions for that city
-
 var APIKey ='eec3413a16d43f5e64f5215a7760f24b';
 
 
@@ -56,7 +52,6 @@ function displayWeatherInfo(weatherData){
     weatherData.main.temp_max;
     weatherData.main.temp_min;
    uvIndex(weatherData);
-
 
 
 document.querySelector('#cityHeading').innerHTML=(weatherData.name + (" " + day + "." + month + "." + year));
@@ -123,7 +118,7 @@ var savedCitySearch =function(event){
 }
 
 //for search history part 
-var displaySearchedCities = function(event){
+var displaySearchedCities = function(){
     //event.preventDefault();
     //for page refresh
     var savedCities =JSON.parse(localStorage.getItem("Saved_History"))|| [];
