@@ -26,7 +26,7 @@ var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
 //get fetch for api
 var getWeatherInfo = function(cityName){
     //fetch request to get Munich as a city
-    fetch("http://api.openweathermap.org/data/2.5/weather?q="
+    fetch("https://api.openweathermap.org/data/2.5/weather?q="
         + cityName
         + "&appid="
         + APIKey
@@ -70,7 +70,7 @@ forecastContainerEl.classList.remove('hidden');
  imgContainer.innerHTML = '';
 
  var weatherImg = document.createElement('img');
- weatherImg.setAttribute('src', "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png");
+ weatherImg.setAttribute('src', "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png");
 
   // Append 'img' to the <div>
   imgContainer.appendChild(weatherImg);
