@@ -22,6 +22,7 @@ var savedCitiyContainerEl= document.querySelector("#city-container");
 var weatherContainerEl= document.querySelector("#weatherContainer");
 var cityButton= document.querySelector("#btn-city");
 
+
 //Set localStorage
 //var savedCities = localStorage.setItem("City", cityName);
 var savedCities =JSON.parse(localStorage.getItem("Saved_History")) || [];
@@ -113,7 +114,9 @@ var savedCitySearch =function(event){
     // var cityName = cityNameEl.value.trim();
     var savedCity= event.target.innerHTML;
     if(savedCity){
-        savedCity.innerHTML=cityName ;
+        console.log(savedCity);
+        getWeatherInfo(savedCity);
+        
         
     }
     
@@ -155,11 +158,11 @@ var uvIndex = function(weatherData){
 }
 
 function uvData(uvInfo , weatherData){
-    var uvDisplayContainer = document.createElement("div");
-    uvDisplayContainer.classList="uvi";
-    console.log(uvInfo);
+    // var uvDisplayContainer = document.createElement("div");
+    // uvDisplayContainer.classList="uvi";
+    // console.log(uvInfo);
     // console.log(uvInfo.current.uvi);
-
+    var uvDisplayContainer=document.querySelector("#uvIndex");
     //check UVIndex
      //favorable under 3    
     //moderate 3-5
@@ -174,9 +177,9 @@ function uvData(uvInfo , weatherData){
         uvDisplayContainer.classList.add("uvSevere");
     }
     uvDisplayContainer.innerHTML= "<span>UV Index: </span>"+ uvInfo.current.uvi;
-    weatherContainerEl.append(uvDisplayContainer);
+    weatherContainerEl.append(uvDisplayContainer)
     //call forecast
-    forecast(weatherData);
+    forecast(weatherData)
     
 
 }
@@ -283,5 +286,3 @@ var cityItem = document.getElementById("city-container");
 displaySearchedCities();
 cityItem.addEventListener("click", savedCitySearch);
 
-//how do I clear the old UV Index, UV Index seems wrong, it pulls it from the morning 
-//cities can be saved but when button is clicked can't be viewed
