@@ -15,4 +15,4 @@ No student Contributors in this course.
 ![ScreenShot](./assets/WeatherDashboard.png)
 
 # Deployed WebPage Location
-https://kamm8899.github.io/Password-Generator/
+https://kamm8899.github.io/Open-Weather-Weather-Forecast/
